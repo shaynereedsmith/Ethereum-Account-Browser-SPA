@@ -1,7 +1,8 @@
 'use strict'
 
-console.log('made it')
-
-$('#submit').on('click', function(){
-  $('#results_container').css('display', 'block')
+$(function(){
+  console.log('hello.')
+  $('#submit').on('click',function(){
+    $('#results_container').css('display', 'block')
+  });
 });

@@ -4,29 +4,12 @@
     <title>thereum Account Browser SPA</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/grade.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <script>
-    $(function(){
-      $('#submit').on('click',function(e){
-        $('#results_container').css('display', 'block')
-      });
-    });
-
-    </script>
-
-    <style>
-      .resultsContainer{
-        border: 1px solid black;
-        padding: 1em;
-      }
-      .accounts{
-        background-color: lightblue;
-        padding: 1em;
-        margin: 1em;
-
-      }
-    </style>
+    <script src="app.js"></script>
 
     <?php
       // LOAD KEY
@@ -35,6 +18,10 @@
 
   </head>
   <body>
+    <header class="gradeOne">
+      <h1>ethereum</h1>
+      <h2>Account Browser SPA</h2>
+    </header>
     <form action="index.php" method="get">
       ETH Address:
       <br>
@@ -45,7 +32,7 @@
       <?php
         if(array_key_exists('eth_address',$_GET)){
 
-          echo '<div class="resultsContainer">Transaction History:';
+          echo '<div class="resultsContainer">Transaction History for: '.$_GET['eth_address'];
           $address = $_GET['eth_address'];
           $result = file_get_contents(
                   'https://api.etherscan.io/api?module=account&action=txlist&address='
@@ -53,24 +40,25 @@
                   .'&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey='
                   .$key);
           $result = json_decode($result,true);
+
+
           foreach ($result['result'] as $acct){
 
-            // echo '<pre>';print_r($acct['to']);
-            $address = $acct['to'];
+            $to = $acct['to'];
+            $from = $acct['from'];
             print '<div class="accounts">
                   To:
-                  <a href="index.php?address=<address>">'
-                  .$address.'
-                  </a><br>'
-                  .'Hash: '.$acct['hash']
-                  .'<br>
+                  <a href="index.php?eth_address='.$to.'">'
+                  .$to.'
+                  <br></a>
+                  From:
+                  <a href="index.php?eth_address='.$from.'">'
+                  .$from.'
+                  </a><br>
                   Block Number: '.$acct['blockNumber']
                   .'<br>
                   Value: '.$acct['value'].'</div>';
 
-
-            // echo '<pre>';print_r($acct);
-            // echo '</div>';
           }
 
         }
