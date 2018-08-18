@@ -29,7 +29,7 @@
         <h3 class="inputHeader">Input Ethereum Address:</h3>
         <br>
         <input class="input" placeholder="Enter address here..." type="text" name="eth_address" required><br><br>
-        <input id="submit" type="submit" value="Submit"></input>
+        <input id="submit" type="submit" value="Submit">
       </form>
     </div>
 
