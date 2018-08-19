@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>thereum Account Browser SPA</title>
+    <title>Ethereum Account Browser SPA</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One|Quicksand|Source+Sans+Pro" rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/grade.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<<<<<<< HEAD
 
+=======
+    <script src="app.js"></script>
+>>>>>>> ef4cb4a79e27b2f6fabb7a176d042167ff5d3da3
   </head>
-
   <body>
+<<<<<<< HEAD
     <?php
       $token = 'MEW5TTTTJKGBAG5VZRGVA12WK9PSP16PM6';
     ?>
@@ -23,6 +30,9 @@
       ?>
 
     </form>
+=======
+    <?php include 'views/template.php'; ?>
+>>>>>>> ef4cb4a79e27b2f6fabb7a176d042167ff5d3da3
   </body>
 
 </html>
