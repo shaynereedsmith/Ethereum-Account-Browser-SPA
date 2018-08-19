@@ -31,16 +31,21 @@
       if ($balance->status) {
         $result = array();
         $result['balance'] = $balance->result;
-        $result['transactions'] =   $transactions = json_decode(
+        $transactions = json_decode(
             file_get_contents(
               'http://api.etherscan.io/api?module=account&action=txlistinternal&address='
               .$this->address
               .'&startblock=0&endblock=2702578&page=1&offset=10&sort=asc&apikey='
               .$this->private_key
               ));
+        if ($transactions->status) {
+          $result['transactions'] = $transactions;
+        }else {
+          $result['transactions'] = 'There are no transactions for this address.';
+        }
 
       }else{
-        $result = 'is not an eth address';
+        $result = 'You did not give a correct ETH address.';
       }
 
       return $this->results = $result;
@@ -58,17 +63,29 @@
 
       if ($balance->status) {
         $result = array();
-        $result = $balance->result;
+        $result = $this->format_value($balance->result);
       }else{
-        $result = 'is not an eth address';
+        $result = 'You did not give a correct ETH address.';
       }
 
       return $result;
 
     }
 
+    function format_value($value){
+
+      $return;
+
+      $value = strval($value);
+      $dif = strlen($value) - 18;
+      $value = str_pad($value,19,"0",STR_PAD_LEFT);
+      // $return = substr_replace($value, '.', $dif,-18);
+      //
+      // return $return;
+      return $value;
+
+    }
+
   }
-
-
 
 ?>
