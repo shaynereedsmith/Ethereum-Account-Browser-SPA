@@ -11,3 +11,5 @@
 <?php include 'views/results.php'; ?>
 
 <?php include 'views/footer.php'; ?>
+
+<?php include 'views/about.php'; ?>
