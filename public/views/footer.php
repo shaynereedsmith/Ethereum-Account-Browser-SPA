@@ -1,6 +1,6 @@
 
 <footer>
-  <p class="footerPara">This is a simple one page application created by <a class="myName" href="">Shayne Smith</a> using the <a href="https://etherscan.io/apis">etherscan api</a>
+  <p class="footerPara">This is a simple one page application created by <a class="myName" href="">Shayne Smith</a> using the <a href="https://etherscan.io/apis" target="_blank">etherscan api</a>
   <br><br>
   <img class="footerImg" width="40px" src="images/ethereum.svg" alt="ethereum logo" />
   </p>

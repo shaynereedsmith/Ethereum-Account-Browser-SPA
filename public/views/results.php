@@ -14,7 +14,7 @@
             if (is_array($eth->results['transactions']->result)) {
               $i = 0;
               foreach($eth->results['transactions']->result as $result){
-                $style = $i%2 ? 'style="background-color: #efefef;"' : 'style="background-color: white;"'
+                $style = $i%2 ? 'style="background-color: #e1f3ff;"' : 'style="background-color: white;"'
                 ?>
                 <div class="resultItem" <?php echo ($style); ?>>
                   <span class="resultItmeHilight">Sent</span> <?php echo ($eth->format_value($result->value));?> ETH
