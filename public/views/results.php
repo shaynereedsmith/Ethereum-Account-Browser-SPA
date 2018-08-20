@@ -1,17 +1,19 @@
 <section>
-  <div>
+  <div class="resultsSection">
+    <h4 class="resultsHeader">Results</h4>
     <?php
       if (is_array($eth->results)) { ?>
         <div class="resultsContainer">
-          <h2>Address: <?php echo ($eth->address);?> - Balance: <?php echo ($eth->format_value($eth->results['balance'])); ?> ETH</h2>
-          <div>
-            <h3>Recent Transactions:</h3>
+          <div class="primaryResult">
+            <h2><span>Address:</span> <?php echo ($eth->address);?> - <span>Balance:</span> <?php echo ($eth->format_value($eth->results['balance'])); ?> ETH</h2>
+            <a href="https://etherscan.io/address/<?php echo ($eth->address); ?>" target="_blank">learn more ></a>
           </div>
+          <h3>Recent Transactions:</h3>
           <div>
             <?php
             if (is_array($eth->results['transactions']->result)) {
               foreach($eth->results['transactions']->result as $result){ ?>
-                <div>
+                <div class="resultItem">
                   Sent <?php echo ($eth->format_value($result->value));?> ETH from address: <?php echo ($result->from); ?> (Balance: <?php echo ($eth->get_results_balance($result->from)); ?> ETH)
                   <br/>
                   to address: <?php echo ($result->to); ?>
@@ -40,9 +42,11 @@
         <div class="resultsContainer">
           <?php echo $eth->results?>
         </div>
-      <?php }else{
-        echo 'Please submit an Ethereum address.';
-      }
+      <?php }else{ ?>
+        <div class="resultsContainer">
+        <?php echo 'Please submit an Ethereum address.'; ?>
+      </div>
+      <?php }
     ?>
   </div>
 </section>
