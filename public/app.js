@@ -4,7 +4,7 @@ $(document).ready(function(){
 
   if ($('.primaryResult').length) {
     var results = $('.primaryResult');
-    $('html,body').animate({scrollTop: results.offset().top - 100}, 1000);
+    $('html,body').animate({scrollTop: results.offset().top - 200}, 1000);
   }
 
   $('.myName').on('click',function(e){
@@ -15,12 +15,12 @@ $(document).ready(function(){
       $('.aboutMe').fadeIn();
       $('html,body').animate({scrollTop: down.offset().top}, 1500);
       $('.down').hide()
-      $('.up').show();
+      $('.up').fadeIn();
     }else{
-      $('html,body').animate({scrollTop: up.offset().top}, 'slow');
-      $('.aboutMe').hide();
-      $('.down').show()
+      $('html,body').animate({scrollTop: up.offset().top - 320}, 1500);
+      $('.aboutMe').delay(1500).fadeOut();
       $('.up').hide();
+      $('.down').fadeIn()
     }
 
   });

@@ -1,15 +1,17 @@
 <section>
   <div class="resultsSection">
-    <h4 class="resultsHeader">Here are your Results</h4>
     <?php
       if (is_array($eth->results)) { ?>
+        <div class="eyeContainer">
+          <h4 class="resultsHeader"><i class="fas fa-eye fa-2x"></i></h4>
+        </div>
         <div class="resultsContainer">
           <div class="primaryResult">
             <h2><span>Address:</span> <?php echo ($eth->address);?>
             <br />
             <span>Balance:</span>
               <?php echo ($eth->format_value($eth->results['balance'])); ?> ETH</h2>
-            <a href="https://etherscan.io/address/<?php echo ($eth->address); ?>" class="itemLink" target="_blank">learn more ></a>
+            <a href="https://etherscan.io/address/<?php echo ($eth->address); ?>" class="mainItemLink" target="_blank">learn more ></a>
           </div>
           <h3>Recent Transactions:</h3>
           <div>
@@ -17,7 +19,7 @@
             if (is_array($eth->results['transactions']->result)) {
               $i = 0;
               foreach($eth->results['transactions']->result as $result){
-                $style = $i%2 ? 'style="background-color: #e1f3ff;"' : 'style="background-color: white;"'
+                $style = $i%2 ? 'style="background-color:#e1f3ff;"' : 'style="background-color:#fbfbfb;"'
                 ?>
                 <div class="resultItem" <?php echo ($style); ?>>
                   <span class="resultItmeHilight">Sent</span> <?php echo ($eth->format_value($result->value));?> ETH
