@@ -5,7 +5,10 @@
       if (is_array($eth->results)) { ?>
         <div class="resultsContainer">
           <div class="primaryResult">
-            <h2><span>Address:</span> <?php echo ($eth->address);?> - <span>Balance:</span> <?php echo ($eth->format_value($eth->results['balance'])); ?> ETH</h2>
+            <h2><span>Address:</span> <?php echo ($eth->address);?>
+            <br />
+            <span>Balance:</span>
+              <?php echo ($eth->format_value($eth->results['balance'])); ?> ETH</h2>
             <a href="https://etherscan.io/address/<?php echo ($eth->address); ?>" class="itemLink" target="_blank">learn more ></a>
           </div>
           <h3>Recent Transactions:</h3>
@@ -51,7 +54,7 @@
         </div>
       <?php }else{ ?>
         <div class="resultsContainer">
-        <?php echo 'Please submit an Ethereum address.'; ?>
+          Please submit an Ethereum address.
       </div>
       <?php }
     ?>

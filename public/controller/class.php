@@ -78,11 +78,27 @@
 
       $value = strval($value);
       $dif = strlen($value) - 18;
-      $value = str_pad($value,19,"0",STR_PAD_LEFT);
-      // $return = substr_replace($value, '.', $dif,-18);
-      //
-      // return $return;
-      return $value;
+      $length = strlen($value);
+
+      if ($length >= 19) {
+        $return = $this->make_value_pretty($value, $dif);
+      }else{
+        $return = $length;
+        for($i = 1; strlen($value) < 19; $i++){
+          $value = '0' . $value;
+        }
+        $return = $this->make_value_pretty($value, strlen($value) - 18);
+      }
+
+      return $return;
+
+    }
+
+    function make_value_pretty($value, $dif){
+
+      $new_array = explode('.', substr_replace($value, '.', $dif,-18));
+      $seg_one = number_format($new_array[0]);
+      return $seg_one . '.' . rtrim($new_array[1],'0');
 
     }
 

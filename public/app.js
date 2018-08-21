@@ -2,6 +2,11 @@
 
 $(document).ready(function(){
 
+  if ($('.primaryResult').length) {
+    var results = $('.primaryResult');
+    $('html,body').animate({scrollTop: results.offset().top - 100}, 1000);
+  }
+
   $('.myName').on('click',function(e){
     e.preventDefault();
     var down = $('.aboutMe');
