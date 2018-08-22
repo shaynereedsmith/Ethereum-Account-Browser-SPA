@@ -7,7 +7,6 @@
     var $action;
     var $address;
     var $results;
-    var $more_results;
 
     function __construct( ){
       $this->private_key = 'MEW5TTTTJKGBAG5VZRGVA12WK9PSP16PM6';
@@ -20,12 +19,14 @@
 
 
 
-    function process_request(){
+    function process_request($sent_address = 0){
 
       $result;
 
+      $address = $sent_address ? $sent_address : $this->address;
+
       $balance = json_decode(file_get_contents('https://api.etherscan.io/api?module=account&action=balance&address='
-              .$this->address.
+              .$address.
               '&tag=latest&apikey='
               .$this->private_key));
 
@@ -35,7 +36,7 @@
         $transactions = json_decode(
             file_get_contents(
               'http://api.etherscan.io/api?module=account&action=txlistinternal&address='
-              .$this->address
+              .$address
               .'&startblock=0&endblock=2702578&page=1&offset=10&sort=asc&apikey='
               .$this->private_key
               ));
@@ -49,7 +50,11 @@
         $result = 'You did not give a correct ETH address.';
       }
 
-      return $this->results = $result;
+      if ($sent_address) {
+        return $result;
+      }else{
+        return $this->results = $result;
+      }
 
     }
 
@@ -103,9 +108,6 @@
 
     }
 
-    function load_more(){
-      return 'test';
-    }
 
   }
 
