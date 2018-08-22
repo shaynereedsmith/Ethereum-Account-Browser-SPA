@@ -120,6 +120,12 @@ form h3 {
   font-family: 'Montserrat', sans-serif;
 }
 
+.resultsContainer h2 {
+  white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
 .primaryResult {
   font-size: 1.2em;
   color: white;
@@ -173,6 +179,9 @@ h2 span {
 }
 
 .resultItem {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   padding: 1em;
   background-color: white;
   -webkit-transition: box-shadow 1s;
@@ -187,6 +196,10 @@ h2 span {
 
 .resultItmeHilight {
   color: #f22802;
+}
+
+.balance{
+  color: #1a96b6;
 }
 
 .preFooter {
@@ -232,7 +245,8 @@ footer a {
 
 .aboutMe{
   display: none;
-  /* padding: 4em; */
+  padding-bottom: 3em;
+  text-align: center;
   color: #f22802;
   font-family: 'Poiret One', cursive;
   background-color: #333333;
@@ -242,13 +256,15 @@ footer a {
 .aboutMe img {
   width: 30%;
   height: 100%;
-  padding: 3em 5em;
+  position: relative;
+  top: 2em;
 }
 
 .descript {
-  float: right;
-  width: 40%;
-  margin: 3em;
+  margin-top: 2em;
+  text-align: left;
+  display: inline-block;
+  width: 45%;
   background-color: #212121;
   padding: 1em;
   border-radius: 10px;
@@ -297,4 +313,52 @@ justify-content: center;
 
 body {
   background-color: #333333;
+}
+
+input[name=eth_address], textarea, select {
+    outline: none;
+}
+
+.social a {
+  color: red;
+  -webkit-transition: color 0.5s;
+  transition: color 0.5s;
+}
+
+.social a:hover {
+  color: white;
+}
+
+.showLarge{
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  .showLarge{
+    display: block;
+  }
+  .formContainer {
+    padding: 0;
+    border-radius: 0;
+  }
+  .resultsHeader{
+    top: -40px;
+  }
+  .aboutMe img {
+    width: 70%;
+  }
+  .descript{
+    margin-top: 5em;
+    width: 75%;
+  }
+  form {
+    width: 90%;
+    border-radius: 0;
+    padding: 1em;
+    box-shadow: 0 0;
+  }
+  .resultsSection {
+    padding: 1em 2em;
+  }
 }

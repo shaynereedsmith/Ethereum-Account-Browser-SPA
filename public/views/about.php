@@ -1,7 +1,7 @@
 <section class="aboutMe">
   <img src="images/meTwo.png" height="300px" />
-    <div class="descript">
-      <div class="descriptcontent">
+  <div class="descript">
+    <div class="descriptcontent">
       Hi.
       <br />
       <br />
@@ -22,9 +22,9 @@
       <br />
       <hr>
       <div class="social">
-        <i class="fab fa-linkedin fa-2x"></i>
-        <i class="fab fa-github-square fa-2x"></i>
-        <i class="fab fa-angellist fa-2x"></i>
+        <a href="https://www.linkedin.com/in/shayne-smith-44153734/" target="_blank"><i class="fab fa-linkedin fa-3x"></i></a>
+        <a href="https://github.com/shaynereedsmith" target="_blank"><i class="fab fa-github-square fa-3x"></i></a>
+        <a href="https://angel.co/shayne-smith-4" target="_blank"><i class="fab fa-angellist fa-3x"></i></a>
       </div>
     </div>
   </div>

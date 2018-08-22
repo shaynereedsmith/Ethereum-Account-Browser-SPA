@@ -7,6 +7,7 @@
     var $action;
     var $address;
     var $results;
+    var $more_results;
 
     function __construct( ){
       $this->private_key = 'MEW5TTTTJKGBAG5VZRGVA12WK9PSP16PM6';
@@ -100,6 +101,10 @@
       $seg_one = number_format($new_array[0]);
       return $seg_one . '.' . rtrim($new_array[1],'0');
 
+    }
+
+    function load_more(){
+      return 'test';
     }
 
   }

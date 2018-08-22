@@ -7,14 +7,15 @@
         </div>
         <div class="resultsContainer">
           <div class="primaryResult">
-            <h2><span>Address:</span> <?php echo ($eth->address);?>
+            <h2><span>Address:</span>
+            <br /><?php echo ($eth->address);?>
             <br />
             <span>Balance:</span>
-              <?php echo ($eth->format_value($eth->results['balance'])); ?> ETH</h2>
+            <br /><?php echo ($eth->format_value($eth->results['balance'])); ?> ETH</h2>
             <a href="https://etherscan.io/address/<?php echo ($eth->address); ?>" class="mainItemLink" target="_blank">learn more ></a>
           </div>
           <h3>Recent Transactions:</h3>
-          <div>
+          <div id="internalResults">
             <?php
             if (is_array($eth->results['transactions']->result)) {
               $i = 0;
@@ -22,17 +23,30 @@
                 $style = $i%2 ? 'style="background-color:#e1f3ff;"' : 'style="background-color:#fbfbfb;"'
                 ?>
                 <div class="resultItem" <?php echo ($style); ?>>
-                  <span class="resultItmeHilight">Sent</span> <?php echo ($eth->format_value($result->value));?> ETH
-                  <br/>
-                  <span class="resultItmeHilight">from address:</span> <?php echo ($result->from); ?> (Balance: <?php echo ($eth->get_results_balance($result->from)); ?> ETH)
-                  <br/>
-                  <span class="resultItmeHilight">to address:</span> <?php echo ($result->to); ?>
-                  <br/>
-                  <span class="resultItmeHilight">on:</span> <?php echo (date('Y/m/d, h:i:sa',$result->timeStamp)); ?>
-                  <br/>
-                  <span class="resultItmeHilight">Hash:</span> <?php echo ($result->hash); ?>
-                  <br/>
-                  <a href="https://etherscan.io/address/<?php echo ($result->from);?>" class="itemLink" target="_blank">learn more</a>
+                  <div>
+                    <span class="resultItmeHilight">Sent</span>
+                    <br class="showLarge" /><?php echo ($eth->format_value($result->value));?> ETH
+                  </div>
+                  <div>
+                    <span class="resultItmeHilight">from address:</span>
+                    <br class="showLarge" /><?php echo ($result->from); ?>
+                    <br class="showLarge" /><span class="balance">(Balance: <?php echo ($eth->get_results_balance($result->from)); ?></span> ETH)
+                  </div>
+                  <div>
+                    <span class="resultItmeHilight">to address:</span>
+                    <br class="showLarge" /><?php echo ($result->to); ?>
+                  </div>
+                  <div>
+                    <span class="resultItmeHilight">on:</span>
+                    <br class="showLarge" /><?php echo (date('Y/m/d, h:i:sa',$result->timeStamp)); ?>
+                  </div>
+                  <div>
+                    <span class="resultItmeHilight">Hash:</span>
+                    <br class="showLarge" /><?php echo ($result->hash); ?>
+                  </div>
+                  <div>
+                    <a href="https://etherscan.io/address/<?php echo ($result->from);?>" class="itemLink" target="_blank">learn more</a>
+                  </div>
                 </div>
 
               <?php
@@ -45,11 +59,11 @@
                   echo ($eth->results['transactions']);
                 } ?>
               </div>
-            <?php }
-
-            ?>
+            <?php } ?>
           </div>
         </div>
+        <data value='20'></data>
+        <div data="<?php echo ($eth->address); ?>,<?php echo ($eth->private_key); ?>" id="loadMore" class="mainItemLink" style="font-family: 'Poiret One', cursive;" >load next 10 results</div>
       <?php }elseif ($eth->results) {?>
         <div class="resultsContainer">
           <?php echo $eth->results?>
