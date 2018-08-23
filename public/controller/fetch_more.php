@@ -32,7 +32,7 @@
       $arr = get_object_vars($item);
       $arr['value'] = format_value($arr['value']);
       $arr['timeStamp'] = date('Y/m/d, h:i:sa',$arr['timeStamp']);
-      $arr['cleanballance'] = get_results_balance($arr['from']);
+      $arr['ballance'] = get_results_balance($arr['from']);
       $result['transactions'][] = $arr;
     }
   }else{
