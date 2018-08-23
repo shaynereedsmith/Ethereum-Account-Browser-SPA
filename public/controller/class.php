@@ -8,6 +8,10 @@
     var $address;
     var $results;
 
+
+
+
+
     function __construct( ){
       $this->private_key = 'MEW5TTTTJKGBAG5VZRGVA12WK9PSP16PM6';
       if ($_POST) {
@@ -16,6 +20,8 @@
         $this->results = $this->process_request();
       }
     }
+
+
 
 
 
@@ -58,6 +64,10 @@
 
     }
 
+
+
+
+
     function get_results_balance($eth_add){
 
       $result;
@@ -77,6 +87,10 @@
       return $result;
 
     }
+
+
+
+
 
     function format_value($value){
 
@@ -100,6 +114,10 @@
 
     }
 
+
+
+
+
     function make_value_pretty($value, $dif){
 
       $new_array = explode('.', substr_replace($value, '.', $dif,-18));
@@ -107,6 +125,9 @@
       return $seg_one . '.' . rtrim($new_array[1],'0');
 
     }
+
+
+
 
 
   }

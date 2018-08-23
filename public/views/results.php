@@ -63,7 +63,7 @@
           </div>
         </div>
         <div style="text-align: center;">
-            <div data="<?php echo ($eth->address); ?>" id="loadMore" class="mainItemLink" style="font-family: 'Poiret One', cursive;" >load next 10 results</div>
+            <div data="<?php echo ($eth->address); ?>,<?php echo ($eth->private_key); ?>" id="loadMore" class="mainItemLink" style="font-family: 'Poiret One', cursive;" >load next 10 results</div>
         </div>
 
       <?php }elseif ($eth->results) {?>
