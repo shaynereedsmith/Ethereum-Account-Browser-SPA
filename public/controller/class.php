@@ -7,13 +7,14 @@
     var $action;
     var $address;
     var $results;
-
+    var $segment;
 
 
 
 
     function __construct( ){
       $this->private_key = 'MEW5TTTTJKGBAG5VZRGVA12WK9PSP16PM6';
+      $this->segment = $this->run_link($_SERVER['REQUEST_URI']);
       if ($_POST) {
         $this->action = $_POST['action'];
         $this->address = $_POST['eth_address'];
@@ -31,36 +32,41 @@
 
       $address = $sent_address ? $sent_address : $this->address;
 
-      $balance = json_decode(file_get_contents('https://api.etherscan.io/api?module=account&action=balance&address='
-              .$address.
-              '&tag=latest&apikey='
-              .$this->private_key));
+      if ($address) {
+        $balance = json_decode(file_get_contents('https://api.etherscan.io/api?module=account&action=balance&address='
+                .$address.
+                '&tag=latest&apikey='
+                .$this->private_key));
 
-      if ($balance->status) {
-        $result = array();
-        $result['balance'] = $balance->result;
-        $transactions = json_decode(
-            file_get_contents(
-              'http://api.etherscan.io/api?module=account&action=txlistinternal&address='
-              .$address
-              .'&startblock=0&endblock=2702578&page=1&offset=10&sort=asc&apikey='
-              .$this->private_key
-              ));
-        if ($transactions->status) {
-          $result['transactions'] = $transactions;
-        }else {
-          $result['transactions'] = 'There are no transactions for this address.';
+        if ($balance->status) {
+          $result = array();
+          $result['balance'] = $balance->result;
+          $transactions = json_decode(
+              file_get_contents(
+                'http://api.etherscan.io/api?module=account&action=txlistinternal&address='
+                .$address
+                .'&startblock=0&endblock=2702578&page=1&offset=10&sort=asc&apikey='
+                .$this->private_key
+                ));
+          if ($transactions->status) {
+            $result['transactions'] = $transactions;
+          }else {
+            $result['transactions'] = 'There are no transactions for this address.';
+          }
+
+        }else{
+          $result = 'You did not give a correct ETH address.';
         }
 
+        if ($sent_address) {
+          return $result;
+        }else{
+          return $this->results = $result;
+        }
       }else{
-        $result = 'You did not give a correct ETH address.';
+        return false;
       }
 
-      if ($sent_address) {
-        return $result;
-      }else{
-        return $this->results = $result;
-      }
 
     }
 
@@ -127,7 +133,18 @@
     }
 
 
+    function run_link($uri){
 
+      $split = explode('/', $uri);
+      foreach ($split as $segment) {
+        $result = $this->get_results_balance($segment);
+        if($result !== 'You did not give a correct ETH address.'){
+          $_POST['eth_address'] = $segment;
+        }
+
+      }
+
+    }
 
 
   }

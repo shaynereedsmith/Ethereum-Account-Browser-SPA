@@ -2,9 +2,6 @@
 
 $(document).ready(function(){
 
-  // var split = window.location.href.split('/');
-  // var url = split[0] + '//' + split[1] + '/' + split[2] + '/';
-
   if ($('.primaryResult').length) {
     var results = $('.primaryResult');
     $('html,body').animate({scrollTop: results.offset().top - 200}, 1000);
@@ -28,111 +25,64 @@ $(document).ready(function(){
 
   });
 
-  var page = 1;
+  var page = 2;
 
   $('#loadMore').on('click', function(){
 
+    $(this).empty().html(' loading more results, please stand by <i class="fas fa-spinner fa-spin "></i>');
+    console.log($(this));
     var data = $('#loadMore').attr('data');
     var address = data.split(',')[0];
-    var key = data.split(',')[1];
+    // var key = data.split(',')[1];
 
-    $.ajax({ type: 'POST', data: { address: address, key:key, page: page }, url: 'controller/fetch_more.php', success: function(result){
-      console.log(result);
+    $.ajax({ type: 'POST', data: { address: address, page: page }, url: 'controller/fetch_more.php', success: function(result){
+      var data = JSON.parse(result);
+      var style;
+      var i = 0;
+      var delayer = 0;
+      data.transactions.forEach(function(item){
+        style = i%2 ? 'style="background-color:#e1f3ff; opacity:0"' : 'style="background-color:#fbfbfb; opacity:0;"'
+
+        $('#internalResults').append(
+          '<div class="resultItem item_'+item.blockNumber+'" '+style+'>'
+            +'<div>'
+              +'<span class="resultItmeHilight">Sent</span>'
+              +'<br class="showLarge" > '+item.value+' ETH'
+            +'</div>'
+            +'<div>'
+              +'<span class="resultItmeHilight">from address:</span>'
+              +'<br class="showLarge" /> '+item.from
+              +'<br class="showLarge" /><span class="balance">(Balance: '+item.cleanballance+' </span> ETH)'
+            +'</div>'
+            +'<div>'
+              +'<span class="resultItmeHilight">to address:</span>'
+              +'<br class="showLarge" /> '+item.to+
+            +'</div>'
+            +'<div>'
+              +'<span class="resultItmeHilight">on:</span>'
+              +'<br class="showLarge" /> '+item.timeStamp+
+            +'</div>'
+            +'<div>'
+              +'<span class="resultItmeHilight">Hash:</span>'
+              +'<br class="showLarge" /> '+ item.hash +
+            +'</div>'
+            +'<div>'
+              +'<a href="https://etherscan.io/address/'+item.from+'" class="itemLink" target="_blank">learn more</a>'
+              +' <a href="/'+item.to+'" class="itemSearch">serach this address</a>'
+            +'</div?'
+          +'</div>');
+        i++;
+        delayer = delayer + 200;
+        $('.item_'+item.blockNumber)
+          .delay(delayer)
+          .animate(
+            {opacity: '1'},
+            'slow');
+      });
+      page++;
+      $('#loadMore').empty().html('load next 10 results');
     }});
 
-    // $.post('http://api.etherscan.io/api?module=account&action=txlistinternal&address='+address+'&startblock=0&endblock=2702578&page='+page+'&offset=10&sort=asc&apikey='+key, function(result) {
-    //   if (result.status && result.message === 'OK') {
-    //     var style;
-    //     var i = 0;
-    //     var delayer = 0;
-    //     result.result.forEach(function(item){
-    //       style = i%2 ? 'style="background-color:#e1f3ff; opacity:0"' : 'style="background-color:#fbfbfb; opacity:0;"'
-    //       $('#internalResults').append(
-    //         '<div class="resultItem item_'+item.blockNumber+'" '+style+'>'
-    //           +'<div>'
-    //             +'<span class="resultItmeHilight">Sent</span>'
-    //             +'<br class="showLarge" > '+formatValue(item.value)+' ETH'
-    //           +'</div>'
-    //           +'<div>'
-    //             +'<span class="resultItmeHilight">from address:</span>'
-    //             +'<br class="showLarge" />'+item.from
-    //             +'<br class="showLarge" /><span class="balance">(Balance: BALANCE </span> ETH)'
-    //           +'</div>'
-    //           +'<div>'
-    //             +'<span class="resultItmeHilight">to address:</span>'
-    //             +'<br class="showLarge" />'+item.to+
-    //           +'</div>'
-    //           +'<div>'
-    //             +'<span class="resultItmeHilight">on:</span>'
-    //             +'<br class="showLarge" />'+item.timeStamp+
-    //           +'</div>'
-    //           +'<div>'
-    //             +'<span class="resultItmeHilight">Hash:</span>'
-    //             +'<br class="showLarge" />'+ item.hash +
-    //           +'</div>'
-    //           +'<div>'
-    //             +'<a href="https://etherscan.io/address/'+item.from+'" class="itemLink" target="_blank">learn more</a>'
-    //           +'</div?'
-    //         +'</div>');
-    //         i++;
-    //         delayer = delayer + 200;
-    //         $('.item_'+item.blockNumber)
-    //         .delay(delayer)
-    //         .animate(
-    //           {opacity: '1'},
-    //           'slow');
-    //         });
-    //         page++;
-    //       }
-    //     }
-      // );
   });
-
-  function formatValue(value) {
-
-    var result;
-
-    var length = value.length;
-    var dif = length - 18;
-
-    if (length >= 19) {
-      result = insertDecimal(value);
-    }else{
-      var newval = value;
-      for (var i = 0; i < 19; i++) {
-        console.log(newval);
-        // newval = '0' + newval;
-      }
-      // console.log(newval);
-      // result = insertDecimal(value);
-    }
-
-    return result;
-
-  }
-
-  function insertDecimal(num) {
-
-    // var newNum = num.split('').reverse().join('');
-    // var last = newNum.substring(0,18).split('');
-    //
-    //
-    // last = stripper(last);
-    //
-    // last = last.reverse().join('');
-    // var first = newNum.substring(18).split('').reverse().join('');
-    // return first + '.' + last;
-  }
-
-  function stripper(array){
-    // array.forEach(function(value,key){
-    //   if (value === '0') {
-    //     array.shift();
-    //   }else{
-    //     return array;
-    //   }
-    // });
-    return array;
-  }
 
 });

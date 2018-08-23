@@ -46,6 +46,7 @@
                   </div>
                   <div>
                     <a href="https://etherscan.io/address/<?php echo ($result->from);?>" class="itemLink" target="_blank">learn more</a>
+                    <a href="/<?php echo ($eth->address); ?>" class="itemSearch">serach this address</a>
                   </div>
                 </div>
 
@@ -63,7 +64,7 @@
           </div>
         </div>
         <div style="text-align: center;">
-            <div data="<?php echo ($eth->address); ?>,<?php echo ($eth->private_key); ?>" id="loadMore" class="mainItemLink" style="font-family: 'Poiret One', cursive;" >load next 10 results</div>
+            <div data="<?php echo ($eth->address); ?>" id="loadMore" class="mainItemLink" style="font-family: 'Poiret One', cursive;" >load next 10 results</div>
         </div>
 
       <?php }elseif ($eth->results) {?>

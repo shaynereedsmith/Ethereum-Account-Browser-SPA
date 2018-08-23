@@ -1,8 +1,11 @@
 <?php
 
+  include 'class.php';
+  $eth= new eth();
+
   $result;
   $address = $_POST['address'];
-  $key = $_POST['key'];
+  $key = $eth->private_key;
   $page = $_POST['page'];
 
   $balance = json_decode(file_get_contents('https://api.etherscan.io/api?module=account&action=balance&address='
@@ -29,13 +32,14 @@
       $arr = get_object_vars($item);
       $arr['value'] = format_value($arr['value']);
       $arr['timeStamp'] = date('Y/m/d, h:i:sa',$arr['timeStamp']);
+      $arr['cleanballance'] = get_results_balance($arr['from']);
       $result['transactions'][] = $arr;
     }
   }else{
     $result = 'You did not give a correct ETH address.';
   }
 
-  print_r($result);
+  print_r(json_encode($result));
 
 
 

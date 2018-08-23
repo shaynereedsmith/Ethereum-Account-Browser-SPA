@@ -170,6 +170,23 @@ h2 span {
   text-decoration: underline;
 }
 
+.itemSearch {
+  color: #ffffff;
+  margin-top: 1em;
+  padding: 0.5em 0.5em;
+  display: inline-block;
+  text-decoration: none;
+  background-color: #fe8500;
+  -webkit-transition: padding 0.5s, text-decoration 0.5s;
+  transition: padding 0.5s, text-decoration 0.5s;
+}
+
+.itemSearch:hover {
+  padding: 0.5em 1em;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .resultsContainer h3 {
   color: #ffffff;
   text-transform: uppercase;
