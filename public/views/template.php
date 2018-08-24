@@ -1,9 +1,3 @@
-<?php
-  require 'controller/class.php';
-  $eth = new eth();
-  // echo '<pre>';print_r($eth);
-?>
-
 <?php include 'views/header.php'; ?>
 
 <?php include 'views/form.php'; ?>

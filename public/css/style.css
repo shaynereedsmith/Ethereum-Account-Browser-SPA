@@ -319,7 +319,7 @@ footer a {
 .mainItemLink:hover {
   padding: 0.5em 1em;
   cursor: pointer;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .eyeContainer{
@@ -349,6 +349,16 @@ input[name=eth_address], textarea, select {
 .showLarge{
   display: none;
 }
+
+#loadingContainer {
+  display: none;
+  font-family: "Poiret One", cursive;
+  margin-top: 1em;
+  padding: 0.5em 0.5em;
+}
+
+
+
 
 @media (max-width: 768px) {
 

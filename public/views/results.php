@@ -65,6 +65,7 @@
         </div>
         <div style="text-align: center;">
             <div data="<?php echo ($eth->address); ?>" id="loadMore" class="mainItemLink" style="font-family: 'Poiret One', cursive;" >load next 10 results</div>
+            <div id="loadingContainer" style="display:none;">loading more results, please stand by <i class="fas fa-spinner fa-spin "></i></div>
         </div>
 
       <?php }elseif ($eth->results) {?>

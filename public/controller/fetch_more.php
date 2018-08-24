@@ -43,8 +43,6 @@
 
 
 
-
-
   function get_results_balance($eth_add){
 
     $result;

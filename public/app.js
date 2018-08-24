@@ -29,18 +29,19 @@ $(document).ready(function(){
 
   $('#loadMore').on('click', function(){
 
-    $(this).empty().html(' loading more results, please stand by <i class="fas fa-spinner fa-spin "></i>');
-    console.log($(this));
+    $(this).hide()
+    $('#loadingContainer').fadeIn();
     var data = $('#loadMore').attr('data');
     var address = data.split(',')[0];
-    // var key = data.split(',')[1];
 
     $.ajax({ type: 'POST', data: { address: address, page: page }, url: 'controller/fetch_more.php', success: function(result){
+
       var data = JSON.parse(result);
       var style;
       var i = 0;
       var delayer = 0;
       data.transactions.forEach(function(item){
+        console.log(item);
         style = i%2 ? 'style="background-color:#e1f3ff; opacity:0"' : 'style="background-color:#fbfbfb; opacity:0;"'
 
         $('#internalResults').append(
@@ -52,7 +53,7 @@ $(document).ready(function(){
             +'<div>'
               +'<span class="resultItmeHilight">from address:</span>'
               +'<br class="showLarge" /> '+item.from
-              +'<br class="showLarge" /><span class="balance">(Balance: '+item.cleanballance+' </span> ETH)'
+              +'<br class="showLarge" /><span class="balance">(Balance: '+item.ballance+' </span> ETH)'
             +'</div>'
             +'<div>'
               +'<span class="resultItmeHilight">to address:</span>'
@@ -80,7 +81,8 @@ $(document).ready(function(){
             'slow');
       });
       page++;
-      $('#loadMore').empty().html('load next 10 results');
+      $('#loadingContainer').hide();
+      $('#loadMore').fadeIn();
     }});
 
   });

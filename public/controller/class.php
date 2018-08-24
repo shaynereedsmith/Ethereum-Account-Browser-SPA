@@ -15,10 +15,14 @@
     function __construct( ){
       $this->private_key = 'MEW5TTTTJKGBAG5VZRGVA12WK9PSP16PM6';
       $this->segment = $this->run_link($_SERVER['REQUEST_URI']);
+
       if ($_POST) {
         $this->action = $_POST['action'];
         $this->address = $_POST['eth_address'];
         $this->results = $this->process_request();
+        if ($this->action === 'link') {
+          // header('Location: /');
+        }
       }
     }
 
@@ -139,7 +143,10 @@
       foreach ($split as $segment) {
         $result = $this->get_results_balance($segment);
         if($result !== 'You did not give a correct ETH address.'){
+
+          $_POST['action'] = 'link';
           $_POST['eth_address'] = $segment;
+
         }
 
       }
@@ -148,5 +155,3 @@
 
 
   }
-
-?>
